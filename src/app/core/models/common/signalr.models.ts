@@ -1,0 +1,1 @@
+export type HubConnectionStatus = 'Connected' | 'Connecting' | 'Disconnected' | 'Error';

@@ -1,0 +1,403 @@
+/* ==========================================================================
+   Fluxify Console — Global Theme
+   Import this once, e.g. from src/styles.css:
+     @import 'theme/styles.css';
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- Color: surfaces ---- */
+  --fx-canvas: #0a0e1a;      /* page background, deepest layer */
+  --fx-surface: #10152a;     /* sidebar / topbar */
+  --fx-elevated: #151c30;    /* cards, hovers, panels */
+  --fx-elevated-2: #1a2338;  /* hover on elevated, active rows */
+  --fx-overlay: #10152acc;   /* dropdowns/menus over content */
+
+  /* ---- Color: lines ---- */
+  --fx-line: #1e2740;
+  --fx-line-soft: #171f36;
+
+  /* ---- Color: text ---- */
+  --fx-ink: #f2f4fa;         /* primary text */
+  --fx-mist: #8b93ab;        /* secondary text */
+  --fx-fog: #565f7a;         /* tertiary text, placeholders */
+
+  /* ---- Color: brand + signal ---- */
+  --fx-violet: #8b5cf6;
+  --fx-azure: #4f7fff;
+  --fx-gradient: linear-gradient(135deg, var(--fx-violet), var(--fx-azure));
+  --fx-gradient-soft: linear-gradient(135deg, #8b5cf626, #4f7fff26);
+
+  --fx-danger: #f2596b;
+  --fx-danger-soft: #f2596b1f;
+  --fx-success: #35d69b;
+  --fx-success-soft: #35d69b1f;
+  --fx-warning: #f5a623;
+  --fx-warning-soft: #f5a6231f;
+
+  /* ---- Type ---- */
+  --fx-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --fx-font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --fx-text-xs: 11px;
+  --fx-text-sm: 12.5px;
+  --fx-text-base: 13.5px;
+  --fx-text-md: 15px;
+  --fx-text-lg: 18px;
+  --fx-text-xl: 22px;
+  --fx-text-2xl: 28px;
+
+  /* ---- Radius ---- */
+  --fx-radius-sm: 8px;
+  --fx-radius-md: 12px;
+  --fx-radius-lg: 16px;
+  --fx-radius-pill: 999px;
+
+  /* ---- Shadow ---- */
+  --fx-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --fx-shadow-md: 0 12px 28px -8px rgba(0, 0, 0, 0.5);
+  --fx-shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.6);
+
+  /* ---- Layout ---- */
+  --fx-sidebar-w: 248px;
+  --fx-sidebar-w-collapsed: 76px;
+  --fx-topbar-h: 64px;
+
+  /* ---- Motion ---- */
+  --fx-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fx-fast: 0.15s;
+  --fx-med: 0.25s;
+}
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fx-canvas);
+  color: var(--fx-ink);
+  font-family: var(--fx-font-ui);
+  font-size: var(--fx-text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+svg {
+  display: block;
+}
+
+/* ---- Focus ---- */
+:focus-visible {
+  outline: 2px solid var(--fx-azure);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: var(--fx-violet);
+  color: #fff;
+}
+
+/* ---- Scrollbars ---- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fx-line) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--fx-line);
+  border-radius: var(--fx-radius-pill);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--fx-fog);
+}
+
+/* ---- Type scale utilities ---- */
+.fx-text-xs { font-size: var(--fx-text-xs); }
+.fx-text-sm { font-size: var(--fx-text-sm); }
+.fx-text-md { font-size: var(--fx-text-md); }
+.fx-text-lg { font-size: var(--fx-text-lg); }
+.fx-text-xl { font-size: var(--fx-text-xl); }
+
+.fx-mono {
+  font-family: var(--fx-font-mono);
+  letter-spacing: 0.01em;
+}
+
+.fx-text-primary { color: var(--fx-ink); }
+.fx-text-secondary { color: var(--fx-mist); }
+.fx-text-tertiary { color: var(--fx-fog); }
+
+/* ---- Gradient text (used sparingly — stat highlights, brand mark) ---- */
+.fx-gradient-text {
+  background: var(--fx-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- Buttons ----
+   Base: .fx-btn
+   Variant (pick one): --primary  --secondary  --ghost  --outline  --danger  --success  --link
+   Size (optional, default = md): --sm  --lg
+   Modifiers: --block (full width)  --icon (square, no label)  --loading (shows .fx-spinner)
+   Use plain classes anywhere — projected modal/dialog/toast content included, no component needed. */
+.fx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: var(--fx-radius-md);
+  font-family: var(--fx-font-ui);
+  font-size: var(--fx-text-base);
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--fx-fast) var(--fx-ease), border-color var(--fx-fast) var(--fx-ease),
+    color var(--fx-fast) var(--fx-ease), filter var(--fx-fast) var(--fx-ease), opacity var(--fx-fast) var(--fx-ease);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+  }
+
+  &:disabled,
+  &.fx-btn--loading {
+    opacity: 0.55;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--fx-azure);
+    outline-offset: 2px;
+  }
+}
+
+/* ---- Sizes ---- */
+.fx-btn--sm {
+  height: 30px;
+  padding: 0 12px;
+  font-size: var(--fx-text-sm);
+  border-radius: var(--fx-radius-sm);
+
+  svg { width: 14px; height: 14px; }
+}
+
+.fx-btn--lg {
+  height: 46px;
+  padding: 0 22px;
+  font-size: var(--fx-text-md);
+}
+
+/* ---- Variants ---- */
+.fx-btn--primary {
+  background: var(--fx-gradient);
+  color: #fff;
+
+  &:hover:not(:disabled):not(.fx-btn--loading) {
+    filter: brightness(1.08);
+  }
+}
+
+.fx-btn--secondary {
+  background: var(--fx-elevated-2);
+  border-color: var(--fx-line);
+  color: var(--fx-ink);
+
+  &:hover:not(:disabled):not(.fx-btn--loading) {
+    border-color: var(--fx-fog);
+  }
+}
+
+.fx-btn--ghost {
+  background: var(--fx-elevated);
+  border-color: var(--fx-line);
+  color: var(--fx-mist);
+
+  &:hover:not(:disabled):not(.fx-btn--loading) {
+    color: var(--fx-ink);
+    border-color: var(--fx-azure);
+  }
+}
+
+.fx-btn--outline {
+  background: transparent;
+  border-color: var(--fx-line);
+  color: var(--fx-mist);
+
+  &:hover:not(:disabled):not(.fx-btn--loading) {
+    color: var(--fx-ink);
+    border-color: var(--fx-azure);
+    background: var(--fx-elevated);
+  }
+}
+
+.fx-btn--danger {
+  background: var(--fx-danger-soft);
+  color: var(--fx-danger);
+
+  &:hover:not(:disabled):not(.fx-btn--loading) {
+    background: var(--fx-danger);
+    color: #fff;
+  }
+}
+
+.fx-btn--success {
+  background: var(--fx-success-soft);
+  color: var(--fx-success);
+
+  &:hover:not(:disabled):not(.fx-btn--loading) {
+    background: var(--fx-success);
+    color: #0a0e1a;
+  }
+}
+
+.fx-btn--link {
+  height: auto;
+  padding: 0;
+  background: transparent;
+  color: var(--fx-azure);
+  font-weight: 600;
+
+  &:hover:not(:disabled):not(.fx-btn--loading) {
+    text-decoration: underline;
+  }
+}
+
+/* ---- Modifiers ---- */
+.fx-btn--block {
+  width: 100%;
+}
+
+.fx-btn--icon {
+  padding: 0;
+  width: 38px;
+  flex: 0 0 auto;
+}
+
+.fx-btn--icon.fx-btn--sm { width: 30px; }
+.fx-btn--icon.fx-btn--lg { width: 46px; }
+
+/* Icon-only buttons are usually low-emphasis chrome (topbar, list rows) —
+   round them and drop the border by default; still overridable per variant above. */
+.fx-btn--icon.fx-btn--ghost,
+.fx-btn--icon.fx-btn--outline {
+  border-color: transparent;
+  background: transparent;
+  color: var(--fx-mist);
+
+  &:hover:not(:disabled) {
+    background: var(--fx-elevated);
+    color: var(--fx-ink);
+    border-color: transparent;
+  }
+}
+
+/* ---- Spinner (used inside .fx-btn--loading, or standalone) ---- */
+.fx-spinner {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: currentColor;
+  border-radius: 999px;
+  animation: fx-spin 0.7s linear infinite;
+}
+
+.fx-btn--ghost .fx-spinner,
+.fx-btn--secondary .fx-spinner,
+.fx-btn--outline .fx-spinner,
+.fx-btn--link .fx-spinner {
+  border-color: var(--fx-line);
+  border-top-color: currentColor;
+}
+
+@keyframes fx-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ---- Dialog footer (for components opened via DialogService — they render their own
+   body + this footer bar, since the dialog shell only supplies backdrop/header/close) ---- */
+.fx-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px -20px -20px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--fx-line-soft);
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

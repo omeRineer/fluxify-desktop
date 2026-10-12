@@ -1,0 +1,17 @@
+@import url("./fluxify.buttons.css");
+@import url("./fluxify.dialog.css");
+@import url("./fluxify.toast.css");
+
+
+.logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  border-radius: 12px;
+  color: #fff;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+}

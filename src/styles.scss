@@ -1,1 +1,242 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("../public/assets/css/fluxify.all.css");
+
+/* ==========================================================================
+   Fluxify Console — Global Theme
+   Import this once, e.g. from src/styles.css:
+     @import 'theme/styles.css';
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* ---- Color: surfaces ---- */
+  --fx-canvas: #0a0e1a;      /* page background, deepest layer */
+  --fx-surface: #10152a;     /* sidebar / topbar */
+  --fx-elevated: #151c30;    /* cards, hovers, panels */
+  --fx-elevated-2: #1a2338;  /* hover on elevated, active rows */
+  --fx-overlay: #10152acc;   /* dropdowns/menus over content */
+
+  /* ---- Color: lines ---- */
+  --fx-line: #1e2740;
+  --fx-line-soft: #171f36;
+
+  /* ---- Color: text ---- */
+  --fx-ink: #f2f4fa;         /* primary text */
+  --fx-mist: #8b93ab;        /* secondary text */
+  --fx-fog: #565f7a;         /* tertiary text, placeholders */
+
+  /* ---- Color: brand + signal ---- */
+  --fx-violet: #8b5cf6;
+  --fx-azure: #4f7fff;
+  --fx-gradient: linear-gradient(135deg, var(--fx-violet), var(--fx-azure));
+  --fx-gradient-soft: linear-gradient(135deg, #8b5cf626, #4f7fff26);
+
+  --fx-danger: #f2596b;
+  --fx-danger-soft: #f2596b1f;
+  --fx-success: #35d69b;
+  --fx-success-soft: #35d69b1f;
+  --fx-warning: #f5a623;
+  --fx-warning-soft: #f5a6231f;
+
+  /* ---- Type ---- */
+  --fx-font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --fx-font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --fx-text-xs: 11px;
+  --fx-text-sm: 12.5px;
+  --fx-text-base: 13.5px;
+  --fx-text-md: 15px;
+  --fx-text-lg: 18px;
+  --fx-text-xl: 22px;
+  --fx-text-2xl: 28px;
+
+  /* ---- Radius ---- */
+  --fx-radius-sm: 8px;
+  --fx-radius-md: 12px;
+  --fx-radius-lg: 16px;
+  --fx-radius-pill: 999px;
+
+  /* ---- Shadow ---- */
+  --fx-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --fx-shadow-md: 0 12px 28px -8px rgba(0, 0, 0, 0.5);
+  --fx-shadow-lg: 0 24px 48px -12px rgba(0, 0, 0, 0.6);
+
+  /* ---- Layout ---- */
+  --fx-sidebar-w: 248px;
+  --fx-sidebar-w-collapsed: 76px;
+  --fx-topbar-h: 64px;
+
+  /* ---- Motion ---- */
+  --fx-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fx-fast: 0.15s;
+  --fx-med: 0.25s;
+}
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fx-canvas);
+  color: var(--fx-ink);
+  font-family: var(--fx-font-ui);
+  font-size: var(--fx-text-base);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+svg {
+  display: block;
+}
+
+/* ---- Focus ---- */
+:focus-visible {
+  outline: 2px solid var(--fx-azure);
+  outline-offset: 2px;
+  border-radius: var(--fx-radius-sm);
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: var(--fx-violet);
+  color: #fff;
+}
+
+/* ---- Scrollbars ---- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fx-line) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--fx-line);
+  border-radius: var(--fx-radius-pill);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--fx-fog);
+}
+
+/* ---- Type scale utilities ---- */
+.fx-text-xs { font-size: var(--fx-text-xs); }
+.fx-text-sm { font-size: var(--fx-text-sm); }
+.fx-text-md { font-size: var(--fx-text-md); }
+.fx-text-lg { font-size: var(--fx-text-lg); }
+.fx-text-xl { font-size: var(--fx-text-xl); }
+
+.fx-mono {
+  font-family: var(--fx-font-mono);
+  letter-spacing: 0.01em;
+}
+
+.fx-text-primary { color: var(--fx-ink); }
+.fx-text-secondary { color: var(--fx-mist); }
+.fx-text-tertiary { color: var(--fx-fog); }
+
+/* ---- Gradient text (used sparingly — stat highlights, brand mark) ---- */
+.fx-gradient-text {
+  background: var(--fx-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+
+/* Arka plan karartması (Backdrop) */
+.cdk-overlay-backdrop.dark-slate-backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Modal Konteynırı / Paneli */
+.cdk-dialog-container.dark-slate-panel {
+  display: block;
+  width: 100%;
+  background-color: #111625;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  color: #f8fafc;
+  overflow: hidden;
+  outline: none;
+  animation: modalIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

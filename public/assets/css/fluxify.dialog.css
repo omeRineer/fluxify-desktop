@@ -1,0 +1,130 @@
+.cdk-dark-slate-backdrop {
+  background: rgba(10, 14, 26, 0.72) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+ 
+/* ---- Overlay pane (the direct wrapper around your component's host) ---- */
+.cdk-dark-slate-panel {
+  display: flex;
+  max-height: 88vh;
+  background: var(--fx-elevated);
+  border: 1px solid var(--fx-line);
+  border-radius: var(--fx-radius-lg);
+  box-shadow: var(--fx-shadow-lg);
+  overflow: hidden;
+  animation: fx-pop-in 0.16s var(--fx-ease);
+}
+ 
+@keyframes fx-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+ 
+/* ---- Put `host: { class: 'fx-modal-host' }` on every component that extends
+   CoreModalComponent — makes it fill the panel and lets the body scroll
+   internally instead of the whole panel. ---- */
+.fx-modal-host {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: 100%;
+}
+ 
+/* ---- Header: <div class="fx-modal-header"><h2 class="fx-modal-title">...</h2>
+   <button class="fx-modal-close" (click)="close()">...</button></div> ---- */
+.fx-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex: 0 0 auto;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--fx-line-soft);
+}
+ 
+.fx-modal-title {
+  margin: 0;
+  font-size: var(--fx-text-lg);
+  font-weight: 700;
+  color: var(--fx-ink);
+}
+ 
+.fx-modal-close {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--fx-radius-md);
+  background: none;
+  border: none;
+  color: var(--fx-mist);
+  cursor: pointer;
+  transition: background var(--fx-fast) var(--fx-ease), color var(--fx-fast) var(--fx-ease);
+ 
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+ 
+  &:hover {
+    background: var(--fx-elevated-2);
+    color: var(--fx-ink);
+  }
+}
+ 
+/* ---- Body: <div class="fx-modal-body"> ... your form / content ... </div> ---- */
+.fx-modal-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px;
+  color: var(--fx-mist);
+  font-size: var(--fx-text-base);
+  line-height: 1.55;
+}
+ 
+/* ---- Footer: <div class="fx-modal-footer">
+   <button class="fx-btn fx-btn--ghost" (click)="cancel()">Vazgeç</button>
+   <button class="fx-btn fx-btn--primary" (click)="confirm(data)">Kaydet</button>
+   </div> ---- */
+.fx-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 16px 20px;
+  border-top: 1px solid var(--fx-line-soft);
+}
+ 
+/* ---- Legacy: kept for anything still using the old hand-rolled DialogService.
+   Prefer .fx-modal-footer above for CoreModalComponent-based modals. ---- */
+.fx-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px -20px -20px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--fx-line-soft);
+}
+ 
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

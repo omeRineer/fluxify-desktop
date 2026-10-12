@@ -1,0 +1,192 @@
+/* ==========================================================================
+   Fluxify Console — Toast Theme
+   Drop-in replacement for the toast CSS. Same selectors ToastService already
+   emits (custom-toast, toast-media-wrapper, toast-title, ...) — no TS changes
+   needed. Requires the --fx-* tokens from theme/styles.css to be loaded too.
+   Add to angular.json "styles" alongside theme/styles.css.
+   ========================================================================== */
+
+#custom-toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.custom-toast {
+  position: relative;
+  overflow: hidden;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  min-width: 320px;
+  max-width: 420px;
+  background: var(--fx-elevated);
+  color: var(--fx-ink);
+  border: 1px solid var(--fx-line);
+  border-left: 3px solid transparent;
+  border-radius: var(--fx-radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--fx-shadow-lg);
+  font-family: var(--fx-font-ui);
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.25s ease;
+}
+
+.custom-toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* ---- Level accents (left border) ---- */
+.custom-toast.success { border-left-color: var(--fx-success); }
+.custom-toast.info    { border-left-color: var(--fx-azure); }
+.custom-toast.warning { border-left-color: var(--fx-warning); }
+.custom-toast.error   { border-left-color: var(--fx-danger); }
+.custom-toast.chat    { border-left-color: var(--fx-violet); }
+.custom-toast.loading { border-left-color: var(--fx-azure); }
+
+/* ---- Media / icon chip ---- */
+.toast-media-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  margin-right: 14px;
+  border-radius: var(--fx-radius-md);
+  background: var(--fx-elevated-2);
+}
+
+.toast-custom-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  object-fit: cover;
+  margin-right: 14px;
+  border: 1px solid var(--fx-line-soft);
+}
+
+.toast-icon {
+  width: 19px;
+  height: 19px;
+}
+
+.success .toast-media-wrapper { background: var(--fx-success-soft); }
+.info    .toast-media-wrapper { background: rgba(79, 127, 255, 0.14); }
+.warning .toast-media-wrapper { background: var(--fx-warning-soft); }
+.error   .toast-media-wrapper { background: var(--fx-danger-soft); }
+.chat    .toast-media-wrapper { background: rgba(139, 92, 246, 0.14); }
+
+.success .toast-icon { fill: var(--fx-success); }
+.info    .toast-icon { fill: var(--fx-azure); }
+.warning .toast-icon { fill: var(--fx-warning); }
+.error   .toast-icon { fill: var(--fx-danger); }
+.chat    .toast-icon { fill: var(--fx-violet); }
+
+/* ---- Content ---- */
+.toast-content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.toast-title {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--fx-ink);
+  margin-bottom: 2px;
+}
+
+.toast-message {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--fx-mist);
+}
+
+/* ---- Close button ---- */
+.toast-close-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  border-radius: var(--fx-radius-sm);
+  background: none;
+  border: none;
+  font-size: 17px;
+  line-height: 1;
+  color: var(--fx-fog);
+  cursor: pointer;
+  transition: background var(--fx-fast) var(--fx-ease), color var(--fx-fast) var(--fx-ease);
+}
+
+.toast-close-btn:hover {
+  background: var(--fx-elevated-2);
+  color: var(--fx-ink);
+}
+
+/* ---- Loading spinner ---- */
+@keyframes toast-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.toast-spinner {
+  width: 19px;
+  height: 19px;
+  border: 2.5px solid var(--fx-line);
+  border-top-color: var(--fx-azure);
+  border-radius: 999px;
+  animation: toast-spin 0.7s linear infinite;
+}
+
+/* ---- Progress bar ---- */
+.toast-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+}
+
+.success .toast-progress-bar { background: var(--fx-success); opacity: 0.55; }
+.info    .toast-progress-bar { background: var(--fx-azure); opacity: 0.55; }
+.warning .toast-progress-bar { background: var(--fx-warning); opacity: 0.55; }
+.error   .toast-progress-bar { background: var(--fx-danger); opacity: 0.55; }
+.chat    .toast-progress-bar { background: var(--fx-violet); opacity: 0.55; }
+
+/* ---- Clickable state ---- */
+.custom-toast.toast-clickable {
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.25s ease,
+    background var(--fx-fast) var(--fx-ease), border-color var(--fx-fast) var(--fx-ease);
+}
+
+.custom-toast.toast-clickable:hover {
+  background: var(--fx-elevated-2);
+  border-color: var(--fx-azure);
+}
+
+/* ---- Small screens: full-width toasts ---- */
+@media (max-width: 480px) {
+  #custom-toast-container {
+    left: 12px;
+    right: 12px;
+    top: 12px;
+  }
+
+  .custom-toast {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+  }
+}
