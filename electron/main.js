@@ -11,7 +11,7 @@ let envPath = null;
 if (app.isPackaged)
     envPath = path.resolve(process.resourcesPath, 'environments', `.env.${currentEnv}`)
 else
-    envPath = path.resolve(process.cwd(), 'environments', `.env.${currentEnv}`)
+    envPath = path.resolve(__dirname, 'environments', `.env.${currentEnv}`)
 
 dotenv.config({ path: envPath })
 

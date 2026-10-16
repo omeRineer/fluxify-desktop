@@ -32,7 +32,7 @@ class NotificationContainerWindow extends BaseWindow {
     async onInit() {
         const token = await getAccessToken();
         if (!this.hub)
-            this.hub = new SignalRService(`${process.env.API_ENV}/hub/presence`, token, {
+            this.hub = new SignalRService(`${process.env.API_URL}/hub/presence`, token, {
                 queryParams: {
                     "Flx-Device-Id": "FLX-DESKTOP",
                     "Flx-Device-Platform": "web"
