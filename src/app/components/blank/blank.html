@@ -1,0 +1,17 @@
+@if(isLoading$()){
+<app-spinner [message]="isLoadingText$()"></app-spinner>
+}
+@else {
+<div class="blank">
+    <button type="button" class="blank__logout" data-action="logout">
+        <svg class="blank__icon" viewBox="0 0 24 24" fill="none">
+            <path d="M9.5 4.5H6.5a1.5 1.5 0 0 0-1.5 1.5v12a1.5 1.5 0 0 0 1.5 1.5h3" stroke="currentColor"
+                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14 8.5 18 12l-4 3.5M18 12H9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+        <span class="blank__label" (click)="logout()">Oturumu kapat</span>
+        <span class="blank__spinner"></span>
+    </button>
+</div>
+}

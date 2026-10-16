@@ -12,20 +12,28 @@
 
 :root {
   /* ---- Color: surfaces ---- */
-  --fx-canvas: #0a0e1a;      /* page background, deepest layer */
-  --fx-surface: #10152a;     /* sidebar / topbar */
-  --fx-elevated: #151c30;    /* cards, hovers, panels */
-  --fx-elevated-2: #1a2338;  /* hover on elevated, active rows */
-  --fx-overlay: #10152acc;   /* dropdowns/menus over content */
+  --fx-canvas: #0a0e1a;
+  /* page background, deepest layer */
+  --fx-surface: #10152a;
+  /* sidebar / topbar */
+  --fx-elevated: #151c30;
+  /* cards, hovers, panels */
+  --fx-elevated-2: #1a2338;
+  /* hover on elevated, active rows */
+  --fx-overlay: #10152acc;
+  /* dropdowns/menus over content */
 
   /* ---- Color: lines ---- */
   --fx-line: #1e2740;
   --fx-line-soft: #171f36;
 
   /* ---- Color: text ---- */
-  --fx-ink: #f2f4fa;         /* primary text */
-  --fx-mist: #8b93ab;        /* secondary text */
-  --fx-fog: #565f7a;         /* tertiary text, placeholders */
+  --fx-ink: #f2f4fa;
+  /* primary text */
+  --fx-mist: #8b93ab;
+  /* secondary text */
+  --fx-fog: #565f7a;
+  /* tertiary text, placeholders */
 
   /* ---- Color: brand + signal ---- */
   --fx-violet: #8b5cf6;
@@ -87,14 +95,32 @@ body {
 }
 
 body {
+  pointer-events: none; /* Şeffaf padding boşluklarının arkaya tıklatmasını sağlar */
   margin: 0;
-  background: var(--fx-canvas);
+  background-color: transparent;
   color: var(--fx-ink);
   font-family: var(--fx-font-ui);
   font-size: var(--fx-text-base);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px; /* Dıştaki şeffaf tıklama geçiren boşluk alanınız */
+  box-sizing: border-box;
+}
+
+.window {
+  pointer-events: auto; /* Pencere içeriğinin tamamını tıklanabilir yapar */
+  background-color: var(--fx-canvas);
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
 }
 
 h1,
@@ -174,20 +200,42 @@ svg {
 }
 
 /* ---- Type scale utilities ---- */
-.fx-text-xs { font-size: var(--fx-text-xs); }
-.fx-text-sm { font-size: var(--fx-text-sm); }
-.fx-text-md { font-size: var(--fx-text-md); }
-.fx-text-lg { font-size: var(--fx-text-lg); }
-.fx-text-xl { font-size: var(--fx-text-xl); }
+.fx-text-xs {
+  font-size: var(--fx-text-xs);
+}
+
+.fx-text-sm {
+  font-size: var(--fx-text-sm);
+}
+
+.fx-text-md {
+  font-size: var(--fx-text-md);
+}
+
+.fx-text-lg {
+  font-size: var(--fx-text-lg);
+}
+
+.fx-text-xl {
+  font-size: var(--fx-text-xl);
+}
 
 .fx-mono {
   font-family: var(--fx-font-mono);
   letter-spacing: 0.01em;
 }
 
-.fx-text-primary { color: var(--fx-ink); }
-.fx-text-secondary { color: var(--fx-mist); }
-.fx-text-tertiary { color: var(--fx-fog); }
+.fx-text-primary {
+  color: var(--fx-ink);
+}
+
+.fx-text-secondary {
+  color: var(--fx-mist);
+}
+
+.fx-text-tertiary {
+  color: var(--fx-fog);
+}
 
 /* ---- Gradient text (used sparingly — stat highlights, brand mark) ---- */
 .fx-gradient-text {
@@ -199,6 +247,7 @@ svg {
 
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -235,6 +284,7 @@ svg {
     opacity: 0;
     transform: scale(0.95) translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);

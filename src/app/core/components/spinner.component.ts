@@ -23,7 +23,7 @@ import { Component, input } from "@angular/core";
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 400px; /* Sabit yükseklik değeri */
+      height: 100%; /* Sabit yükseklik değeri */
       width: 100%;
       border-radius: inherit; /* Kartın veya alanın oval köşelerine uyum sağlar */
     }
@@ -37,8 +37,8 @@ import { Component, input } from "@angular/core";
 
     /* Fluxify Mavisi Yüklenme Halkası */
     .loading-ring {
-      width: 36px;
-      height: 36px;
+      width: 50px;
+      height: 50px;
       border: 3px solid rgba(59, 130, 246, 0.1);
       border-radius: 50%;
       border-top-color: #3b82f6;

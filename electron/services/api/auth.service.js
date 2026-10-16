@@ -2,7 +2,7 @@ const BaseHttpService = require("../common/http.service");
 
 class AuthService extends BaseHttpService {
     constructor() {
-        super("http://193.111.78.161:1020/webapi/auth");
+        super(`${process.env.API_ENV}/webapi/auth`);
     }
 
     login(model) {

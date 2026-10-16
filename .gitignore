@@ -1,5 +1,9 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
+# Spectation
+/src/environments/environment.production.ts
+/electron/environments/.env.production
+
 # Compiled output
 /dist
 /tmp

@@ -1,0 +1,96 @@
+:host {
+    display: block;
+    height: 100%;
+}
+
+.blank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: var(--fx-canvas);
+    font-family: var(--fx-font-ui);
+}
+
+.blank__logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 46px;
+    padding: 0 24px;
+    border: 1px solid var(--fx-line);
+    border-radius: var(--fx-radius-md);
+    background: transparent;
+    color: var(--fx-mist);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color var(--fx-fast) var(--fx-ease),
+        border-color var(--fx-fast) var(--fx-ease),
+        background var(--fx-fast) var(--fx-ease),
+        transform var(--fx-fast) var(--fx-ease);
+}
+
+.blank__icon {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+}
+
+.blank__logout:hover {
+    color: var(--fx-danger);
+    border-color: var(--fx-danger);
+    background: var(--fx-danger-soft);
+}
+
+.blank__logout:active {
+    transform: translateY(1px);
+}
+
+.blank__logout:focus-visible {
+    outline: 2px solid var(--fx-azure);
+    outline-offset: 3px;
+}
+
+/* ---- Loading (sign-out in progress) ---- */
+.blank__spinner {
+    display: none;
+    order: -1;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--fx-line);
+    border-top-color: currentColor;
+    border-radius: 999px;
+    animation: blank-spin 0.7s linear infinite;
+}
+
+.blank__logout.is-loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.blank__logout.is-loading .blank__icon {
+    display: none;
+}
+
+.blank__logout.is-loading .blank__spinner {
+    display: block;
+}
+
+@keyframes blank-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .blank__logout,
+    .blank__spinner {
+        transition-duration: 0.001ms;
+        animation-duration: 0.001ms;
+    }
+}

@@ -1,42 +1,68 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const dotenv = require('dotenv')
 const { registerAuthHandlers } = require('./ipc/auth.handlers');
+const { createTray } = require('./core/tray')
+const MainWindow = require('./windows/main.window')
 
-// Register IPC handlers for authentication
+const currentEnv = process.env.APP_ENV || 'development';
+
+let envPath = null;
+if (app.isPackaged)
+    envPath = path.resolve(process.resourcesPath, 'environments', `.env.${currentEnv}`)
+else
+    envPath = path.resolve(process.cwd(), 'environments', `.env.${currentEnv}`)
+
+dotenv.config({ path: envPath })
+
 registerAuthHandlers();
 
-function createWindow() {
-    const mainWindow = new BrowserWindow({
-        width: 900,
-        height: 500,
-        frame: false,
-        resizable: false,
-        webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
-            contextIsolation: true,
-            nodeIntegration: false, // Security best practice
-        },
-    });
-
-    // For development: load localhost; for production: load built index.html
-    const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
-
-    if (isDev) {
-        mainWindow.loadURL('http://localhost:4200/login');
-        mainWindow.webContents.openDevTools(); // Open DevTools in dev mode
-    } else {
-        mainWindow.loadFile(path.join(__dirname, 'dist/fluxify-desktop/browser/index.html'));
-    }
-}
-
-app.whenReady().then(() => {
-    createWindow();
+app.whenReady().then(async () => {
+    let mainWin = new MainWindow('main');
 
     app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) createWindow();
+        if (BrowserWindow.getAllWindows().length === 0)
+            mainWin = new MainWindow('main');
     });
+
+    await mainWin.init();
+
+    app.setLoginItemSettings({
+        openAtLogin: true,
+        path: app.getPath('exe'),
+    });
+    createTray(mainWin)
 });
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });
+
+ipcMain.on("core:set-mouse-ignore", (event, ignore) => {
+    const window = BrowserWindow.fromWebContents(event.sender);
+
+    if (window && !window.isDestroyed()) {
+        window.setIgnoreMouseEvents(ignore, { forward: true });
+    }
+});
+
+ipcMain.handle("window:close", (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender)
+
+    if (window && !window.isDestroyed())
+        window.close();
+})
+
+ipcMain.handle("window:hide", (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender)
+
+    if (window && !window.isDestroyed())
+        window.hide();
+})
+
+ipcMain.on("window:minimize", (event) => {
+    const window = BrowserWindow.fromWebContents(event.sender)
+
+    if (window && !window.isDestroyed())
+        window.minimize();
+})

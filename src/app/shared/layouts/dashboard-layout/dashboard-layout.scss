@@ -1,0 +1,83 @@
+.title-bar {
+    height: 30px;
+    background-color: var(--fx-elevated);
+    border-bottom: 1px solid var(--fx-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    -webkit-app-region: drag; /* Pencerenin tutulup sürüklenmesini sağlar */
+}
+
+/* Sol kısım (Minik bir detay + Başlık) */
+.title-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.title-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--fx-gradient);
+    border-radius: 50%;
+}
+
+.title-text {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--fx-mist);
+    letter-spacing: 0.3px;
+}
+
+/* Pencere Kontrol Butonları (Sürükleme alanından çıkarılmıştır) */
+.window-controls {
+    display: flex;
+    height: 100%;
+    -webkit-app-region: no-drag; /* Tıklanabilir olması için zorunlu */
+}
+
+.window-controls button {
+    background: transparent;
+    border: none;
+    color: var(--fx-mist);
+    width: 46px;
+    height: 100%;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+}
+
+.window-controls button:hover {
+    background-color: var(--fx-elevated-2);
+    color: var(--fx-ink);
+}
+
+/* Kapatma butonuna özel danger teması */
+#close-btn:hover {
+    background-color: var(--fx-danger-soft);
+    color: var(--fx-danger);
+}
+
+/* İçerik Alanı */
+.content-area {
+    flex: 1;
+    overflow-y: auto;
+    background-color: var(--fx-canvas);
+}
+
+.content-area h1 {
+    margin-top: 0;
+    font-size: 20px;
+    color: var(--fx-ink);
+}
+
+.content-area p {
+    color: var(--fx-mist);
+    font-size: 14px;
+}
+
+

@@ -1,1 +1,19 @@
-<p>dashboard-layout works!</p>
+<div class="window">
+    <div class="title-bar">
+        <div class="title-left">
+            <span class="title-dot"></span>
+            <span class="title-text">Fluxify</span>
+        </div>
+        <div class="window-controls">
+            <button id="min-btn" title="Küçült" (click)="minimize()">&#8211;</button>
+            <button id="close-btn" title="Kapat" (click)="close()">&times;</button>
+        </div>
+    </div>
+
+    <!-- İçerik Alanı -->
+    <div class="content-area">
+        <router-outlet></router-outlet>
+    </div>
+
+
+</div>

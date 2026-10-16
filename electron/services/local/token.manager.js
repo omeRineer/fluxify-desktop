@@ -11,7 +11,13 @@ async function get() {
     return store.get('accessToken');
 }
 
+async function remove() {
+    const store = await getStore();
+    return store.delete('accessToken');
+}
+
 module.exports = {
     getAccessToken: get,
-    setAccessToken: set
+    setAccessToken: set,
+    removeAccessToken: remove
 };

@@ -84,8 +84,8 @@
       <a routerLink="/auth/forgot-password" class="login-form__forgot">Şifremi unuttum</a> -->
         </div>
 
-        <app-button type="submit" [disabled]="isLoading() || !username().trim() || !password().trim()">
-            @if (isLoading()) {
+        <app-button type="submit" [disabled]="isLoading$() || !username().trim() || !password().trim()">
+            @if (isLoading$()) {
             <span class="spinner"></span>
             Giriş yapılıyor...
             } @else {

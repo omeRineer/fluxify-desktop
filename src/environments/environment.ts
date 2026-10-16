@@ -1,4 +1,4 @@
 export const environment = {
-    webApiUrl: "http://193.111.78.161:1020/webapi",
-    hubApiUrl: "http://193.111.78.161:1020/hub"
+    webApiUrl: "https://localhost:1020/webapi",
+    hubApiUrl: "https://localhost:1020/hub"
 };

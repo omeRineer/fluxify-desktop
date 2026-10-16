@@ -30,16 +30,17 @@ export class LoginComponent extends FluxifyComponent {
       this.errorMessage.set('Lütfen kullanıcı adı ve şifrenizi girin.');
       return;
     }
-    
-    this.isLoading.set(true);
 
-    await window.electronAPI.auth.login({userName: userNameVal, password: passwordVal})
+    this.setLoading(true);
+
+    await window.electronAPI.auth.login({ userName: userNameVal, password: passwordVal })
       .then(res => {
-        console.log(res)
-        this.isLoading.set(false);
+        this.setLoading(false)
+        if (res.success)
+          this.router.navigateByUrl('/blank')
       })
       .catch((error) => {
-        this.isLoading.set(false);
+        this.setLoading(false)
         this.errorMessage.set('Giriş yapılırken bir hata oluştu.');
       });
 

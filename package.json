@@ -1,13 +1,14 @@
 {
   "name": "fluxify-desktop",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "electron/main.js",
   "build": {
     "appId": "com.fluxify.desktop",
     "productName": "Fluxify",
     "files": [
-      "dist/fluxify-desktop/**/*",
-      "electron/**/*"
+      "electron/**/*",
+      "dist/**/*",
+      "package.json"
     ],
     "directories": {
       "buildResources": "assets"
@@ -16,7 +17,17 @@
       "target": "dmg"
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "electron/assets/fluxify.ico",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Fluxify"
     }
   },
   "scripts": {
@@ -27,6 +38,8 @@
     "test": "ng test",
     "electron": "electron .",
     "package": "electron-builder",
+    "ng:build": "ng build --configuration production",
+    "build:exe": "npm run ng:build && electron-builder",
     "dev": "concurrently -k \"ng serve\" \"wait-on http://localhost:4200 && electron .\""
   },
   "prettier": {
@@ -50,6 +63,8 @@
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@auth0/angular-jwt": "^5.2.0",
+    "@microsoft/signalr": "^10.0.11",
+    "dotenv": "^18.0.8",
     "electron-store": "^12.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -61,6 +76,7 @@
     "@types/jasmine": "~5.1.0",
     "concurrently": "^10.0.6",
     "electron": "^44.7.0",
+    "electron-builder": "^26.15.3",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
